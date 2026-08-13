@@ -215,8 +215,8 @@ const en: AppStrings = {
   navGitHub: "GitHub",
 
   heroBadge: "Free forever · No sign-up · No ads",
-  heroTitleStart: "Create ",
-  heroTitleAccent: "beautiful",
+  heroTitleStart: "Generate ",
+  heroTitleAccent: "custom",
   heroTitleEnd: " QR codes.",
   heroSubtitle:
     "Generate, customize and download QR codes instantly — completely free and ad-free.",
@@ -436,8 +436,8 @@ const tr: AppStrings = {
   navGitHub: "GitHub",
 
   heroBadge: "Sonsuza dek ücretsiz · Kayıt yok · Reklam yok",
-  heroTitleStart: "Güzel ",
-  heroTitleAccent: "QR kodlar",
+  heroTitleStart: "Kendi ",
+  heroTitleAccent: "QR kodlarınızı",
   heroTitleEnd: " oluşturun.",
   heroSubtitle:
     "QR kodlarınızı anında oluşturun, özelleştirin ve indirin — tamamen ücretsiz ve reklamsız.",
