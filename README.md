@@ -2,112 +2,113 @@
 
 > **Create. Connect. Scan.**
 
-A premium, dark-themed QR code generator built with Next.js. Generate, customize and
-download QR codes **entirely in your browser** — no backend, no paid APIs, no accounts,
-**no ads**.
+Next.js ile geliştirilmiş, premium görünümlü bir QR kod oluşturucu. QR kodlarınızı tamamen tarayıcınızda oluşturun, özelleştirin ve indirin — backend yok, ücretli API yok, hesap gerekmez, **reklam yok**.
 
-![Stack](https://img.shields.io/badge/Next.js%2016-TypeScript-blue) ![License](https://img.shields.io/badge/license-MIT-green)
+<p align="left">
+  <img src="https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white" alt="Next.js" />
+  <img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript" />
+  <img src="https://img.shields.io/badge/Tailwind_CSS-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white" alt="Tailwind CSS" />
+</p>
 
-## Features
+---
 
-- **Türkçe + English** — flag-icon language switcher (varsayılan Türkçe)
-- **8 content types** — URL, Text, Wi-Fi, Email, Phone, SMS, Contact (vCard 3.0) and Location (geo URI)
-- **Live preview** — the QR code renders instantly as you type, no generate button
-- **Full customization** — foreground/background colors, square/rounded/dots pattern, square/rounded/circle eye styles, quiet-zone margin, error correction (L/M/Q/H)
-- **Logo upload** — PNG, JPG or SVG (max 5 MB) with size slider; error correction auto-raises to High to keep the code scannable
-- **Downloads** — PNG, SVG and WebP, generated client-side with Blob URLs
-- **Copy to clipboard** — copy the QR image as a PNG
-- **Local history** — the last 8 QR codes, stored only in `localStorage` (restorable, clearable)
-- **Dark/light themes** — dark by default, persisted to `localStorage`, no flash on load
-- **Privacy first, free & ad-free** — your data never leaves the browser
-- Responsive, keyboard-accessible, SEO + Open Graph metadata
+## 📖 Proje Hakkında
 
-## Tech stack
+**Zyqra**, kullanıcıların QR kodlarını özgürce oluşturmasına, özelleştirmesine ve indirmesine olanak tanıyan ücretsiz bir web uygulamasıdır. Tüm işlemler istemci tarafında gerçekleşir; verileriniz hiçbir zaman sunucuya gönderilmez.
 
-| Layer     | Choice                                             |
-| --------- | -------------------------------------------------- |
-| Framework | Next.js 16 (App Router, static output)             |
-| Language  | TypeScript (strict)                                |
-| Styling   | Tailwind CSS v4                                    |
-| Icons     | lucide-react                                       |
-| i18n      | Lightweight custom store (useSyncExternalStore), TR + EN dictionaries |
-| QR engine | [qr-code-styling](https://github.com/kozakdenys/qr-code-styling) v1.9 (MIT) — renders QR codes client-side as SVG/canvas with full styling support |
+## ✨ Özellikler
 
-Everything runs client-side; the app is fully static and deploys on Vercel's free plan.
+- 🌍 **Türkçe + İngilizce** — bayrak ikonlu dil değiştirici (varsayılan Türkçe)
+- 📋 **8 içerik türü** — URL, Metin, Wi-Fi, E-posta, Telefon, SMS, Kişi (vCard 3.0) ve Konum (geo URI)
+- ⚡ **Anlık önizleme** — siz yazarken QR kod anında oluşturulur, buton gerekmez
+- 🎨 **Tam özelleştirme** — ön plan/arka plan renkleri, kare/yuvarlak/nokta deseni, göz stilleri, kenar boşluğu, hata düzeltme seviyesi (L/M/Q/H)
+- 🖼️ **Logo yükleme** — PNG, JPG veya SVG (maks. 5 MB), boyut kaydırıcısı ile; taranabilirlik korunur
+- 💾 **İndirme seçenekleri** — PNG, SVG ve WebP, istemci tarafında Blob URL ile oluşturulur
+- 📋 **Panoya kopyalama** — QR görselini PNG olarak kopyala
+- 🕘 **Yerel geçmiş** — son 8 QR kodu, yalnızca `localStorage`'da saklanır (geri yüklenebilir, temizlenebilir)
+- 🌙 **Koyu/Açık tema** — varsayılan koyu, `localStorage`'a kaydedilir, yüklemede flaş yok
+- 🔒 **Gizlilik öncelikli, ücretsiz ve reklamsız** — verileriniz tarayıcınızı terk etmez
+- 📱 Duyarlı tasarım, klavye erişilebilirliği, SEO + Open Graph meta verileri
 
-## Getting started
+## 🛠️ Kullanılan Teknolojiler
+
+| Katman | Tercih |
+|---|---|
+| Framework | Next.js 16 (App Router, statik çıktı) |
+| Dil | TypeScript (strict) |
+| Stil | Tailwind CSS v4 |
+| İkonlar | lucide-react |
+| i18n | Hafif özel store (useSyncExternalStore), TR + EN sözlükleri |
+| QR motoru | [qr-code-styling](https://github.com/kozakdenys/qr-code-styling) v1.9 (MIT) — SVG/canvas ile tam stil destekli istemci taraflı QR oluşturma |
+
+## 🗂️ Proje Yapısı
+
+```
+app/
+├── layout.tsx            # Metadata, fontlar, tema bootstrap, arka plan
+├── page.tsx              # Ana sayfa bileşimi
+├── docs/page.tsx         # Belgeler + gizlilik sayfası (i18n)
+├── globals.css           # Tasarım token'ları, koyu/açık temalar, temel stiller
+├── icon.svg              # Favicon
+└── opengraph-image.tsx   # Otomatik oluşturulan sosyal paylaşım görseli
+components/
+├── Header.tsx, Hero.tsx, Footer.tsx, LanguageToggle.tsx, ThemeToggle.tsx
+├── QRGenerator.tsx       # State, doğrulama, geçmiş, kalıcılık
+├── ContentTypeSelector.tsx, ContentForm.tsx
+├── CustomizationPanel.tsx, LogoUploader.tsx
+├── QRPreview.tsx         # Anlık QR render (qr-code-styling)
+├── DownloadButtons.tsx   # PNG/SVG/WebP indirme + kopyalama
+├── History.tsx, FeatureCards.tsx
+└── ui/                   # Button, Input, Card, Toast, Flags, …
+lib/
+├── i18n/                 # TR + EN dize sözlükleri + dil store'u
+├── qr/                   # Seçenek eşlemesi + payload oluşturucular (Wi-Fi, vCard, geo, …)
+├── validation/           # URL/e-posta/telefon/koordinat doğrulama (i18n hatalar)
+├── storage/              # localStorage (tema, dil, ayarlar, geçmiş)
+└── constants.ts, utils.ts, typeMeta.tsx
+types/
+└── qr.ts                 # Ortak tipler
+scripts/                  # verify.ts, verify-qr.ts (çevrimdışı kontroller)
+```
+
+## 🚀 Kurulum
 
 ```bash
-# 1. Install dependencies
+# Bağımlılıkları yükleyin
 npm install
 
-# 2. Run locally
+# Yerel olarak çalıştırın
 npm run dev        # http://localhost:3000
 
-# 3. Lint + typecheck + verify payloads & QR rendering
+# Lint + tip kontrolü + doğrulama
 npm run lint
 npm run verify
 
-# 4. Production build
+# Üretim build'i
 npm run build
 npm start
 ```
 
-> `npm run verify` runs unit-style checks for URL/Wi-Fi/Email/vCard/geo payloads and a
-> jsdom-based test that actually renders QR codes through `qr-code-styling`.
+> `npm run verify` — URL/Wi-Fi/E-posta/vCard/geo payload'ları için birim tarzı kontroller çalıştırır ve `qr-code-styling` üzerinden QR kod render'ını test eder.
 
-## Project structure
+## 🔒 Gizlilik
 
-```
-app/
-├── layout.tsx            # Metadata, fonts, theme bootstrap script, ambient background
-├── page.tsx              # Home page composition
-├── docs/page.tsx         # Docs + privacy page (i18n)
-├── globals.css           # Design tokens, dark/light themes, base styles
-├── icon.svg              # Favicon
-└── opengraph-image.tsx   # Auto-generated social share image
-components/
-├── Header.tsx, Hero.tsx, Footer.tsx, LanguageToggle.tsx, ThemeToggle.tsx
-├── QRGenerator.tsx       # State, validation, history, persistence
-├── ContentTypeSelector.tsx, ContentForm.tsx
-├── CustomizationPanel.tsx, LogoUploader.tsx
-├── QRPreview.tsx         # Live QR rendering (qr-code-styling)
-├── DownloadButtons.tsx   # PNG/SVG/WebP downloads + copy
-├── History.tsx, FeatureCards.tsx
-└── ui/                   # Button, Input, Card, Toast, Flags, …
-lib/
-├── i18n/                 # TR + EN string dictionaries + language store
-├── qr/                   # options mapping + payload builders (Wi-Fi, vCard, geo, …)
-├── validation/           # URL/email/phone/coordinate validation (i18n errors)
-├── storage/              # localStorage (theme, language, settings, history)
-└── constants.ts, utils.ts, typeMeta.tsx
-types/
-└── qr.ts                 # Shared types
-scripts/                  # verify.ts, verify-qr.ts (offline checks)
-```
+QR kodlar tamamen tarayıcıda oluşturulur. Tema tercihi, dil, son ayarlar ve QR geçmişi yalnızca `localStorage`'da tutulur; hiçbir veri dışarıya gönderilmez.
 
-## Deploying to Vercel (free)
+## 🤝 Katkıda Bulunma
 
-The project has no server-specific code, no environment variables and no database.
+Katkılarınızı bekliyoruz! Lütfen bir issue açın veya pull request gönderin.
 
-1. Push the project to a GitHub repository:
-   ```bash
-   git init
-   git add .
-   git commit -m "Initial commit: Zyqra"
-   git branch -M main
-   git remote add origin https://github.com/caglarsapmaz/<repo>.git
-   git push -u origin main
-   ```
-2. Go to [vercel.com/new](https://vercel.com/new), import the repository and click **Deploy**.
-   Vercel auto-detects Next.js — no configuration needed.
-3. Your app is live at `https://<project>.vercel.app`.
+1. Bu depoyu fork'layın
+2. Yeni bir branch oluşturun (`git checkout -b ozellik/yeni-ozellik`)
+3. Değişikliklerinizi commit'leyin (`git commit -m 'Yeni özellik eklendi'`)
+4. Branch'inizi push'layın (`git push origin ozellik/yeni-ozellik`)
+5. Bir Pull Request açın
 
-## Privacy
+## 📄 Lisans
 
-QR codes are generated locally in the browser. Theme preference, language, last settings
-and recent QR history are kept only in `localStorage` and are never sent anywhere.
+Bu proje [MIT Lisansı](LICENSE) ile lisanslanmıştır — dilediğiniz gibi kullanabilir, değiştirebilir ve dağıtabilirsiniz.
 
-## License
+---
 
-MIT — free for personal and commercial use.
+<p align="center">Made with ❤️ by <a href="https://github.com/caglarsapmaz">caglarsapmaz</a></p>
