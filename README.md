@@ -11,6 +11,8 @@ Next.js ile geliştirilmiş, premium görünümlü bir QR kod oluşturucu. QR ko
 </p>
 
 ---
+<img width="3024" height="1574" alt="image" src="https://github.com/user-attachments/assets/023f5f31-265f-4c6f-85b0-7148a33601c8" />
+
 
 ## 📖 Proje Hakkında
 
