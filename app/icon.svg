@@ -1,17 +1,14 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" rx="14" fill="#0d0d0d"/>
-  <rect x="12" y="12" width="40" height="40" rx="6" fill="#ffffff"/>
-  <g fill="#0d0d0d">
-    <rect x="16" y="16" width="12" height="12" rx="2"/>
-    <rect x="19" y="19" width="6" height="6" fill="#ffffff"/>
-    <rect x="36" y="16" width="12" height="12" rx="2"/>
-    <rect x="39" y="19" width="6" height="6" fill="#ffffff"/>
-    <rect x="16" y="36" width="12" height="12" rx="2"/>
-    <rect x="19" y="39" width="6" height="6" fill="#ffffff"/>
-    <rect x="32" y="36" width="6" height="6" rx="1.5"/>
-    <rect x="42" y="36" width="6" height="6" rx="1.5"/>
-    <rect x="32" y="44" width="6" height="6" rx="1.5"/>
-    <rect x="42" y="44" width="6" height="6" rx="1.5"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" shape-rendering="crispEdges">
+  <rect width="64" height="64" fill="#000000"/>
+  <rect x="0.5" y="0.5" width="63" height="63" fill="none" stroke="#2e2e2e"/>
+  <g fill="#ededed">
+    <path d="M10 10h18v18H10zM15 15v8h8v-8z" fill-rule="evenodd"/>
+    <path d="M36 10h18v18H36zM41 15v8h8v-8z" fill-rule="evenodd"/>
+    <path d="M10 36h18v18H10zM15 41v8h8v-8z" fill-rule="evenodd"/>
+    <rect x="36" y="36" width="6" height="6"/>
+    <rect x="48" y="36" width="6" height="6"/>
+    <rect x="42" y="42" width="6" height="6"/>
+    <rect x="36" y="48" width="6" height="6"/>
   </g>
-  <circle cx="38" cy="42" r="5" fill="#7c3aed"/>
+  <rect x="48" y="48" width="6" height="6" fill="#3cffa4"/>
 </svg>
