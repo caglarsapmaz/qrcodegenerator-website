@@ -49,9 +49,9 @@ export function CustomizationPanel({
   }));
 
   return (
-    <div className="space-y-7">
-      <section aria-labelledby="style-heading" className="space-y-4">
-        <SectionLabel>{t.custQrStyle}</SectionLabel>
+    <div className="divide-y divide-line">
+      <section aria-labelledby="style-heading" className="space-y-4 py-6">
+        <SectionLabel index="02.A">{t.custQrStyle}</SectionLabel>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <ColorField
             label={t.custForeground}
@@ -64,8 +64,8 @@ export function CustomizationPanel({
             onChange={(background) => onChange({ background })}
           />
         </div>
-        <div className="space-y-1.5">
-          <span className="text-xs font-medium text-fg-secondary">{t.custPattern}</span>
+        <div>
+          <span className="mb-1.5 block text-xs font-medium text-fg-secondary">{t.custPattern}</span>
           <SegmentedControl
             label={t.custPattern}
             options={patternOptions}
@@ -73,8 +73,8 @@ export function CustomizationPanel({
             onChange={(pattern) => onChange({ pattern })}
           />
         </div>
-        <div className="space-y-1.5">
-          <span className="text-xs font-medium text-fg-secondary">{t.custEyeStyle}</span>
+        <div>
+          <span className="mb-1.5 block text-xs font-medium text-fg-secondary">{t.custEyeStyle}</span>
           <SegmentedControl
             label={t.custEyeStyle}
             options={eyeOptions}
@@ -84,8 +84,8 @@ export function CustomizationPanel({
         </div>
       </section>
 
-      <section aria-labelledby="logo-heading" className="space-y-4">
-        <SectionLabel>{t.custLogo}</SectionLabel>
+      <section aria-labelledby="logo-heading" className="space-y-4 py-6">
+        <SectionLabel index="02.B">{t.custLogo}</SectionLabel>
         <LogoUploader
           logo={logo}
           logoSize={settings.logoSize}
@@ -94,8 +94,8 @@ export function CustomizationPanel({
         />
       </section>
 
-      <section aria-labelledby="quiet-zone-heading" className="space-y-4">
-        <SectionLabel>{t.custQuietZone}</SectionLabel>
+      <section aria-labelledby="quiet-zone-heading" className="space-y-4 py-6">
+        <SectionLabel index="02.C">{t.custQuietZone}</SectionLabel>
         <Slider
           label={t.custMargin}
           value={settings.margin}
@@ -107,8 +107,8 @@ export function CustomizationPanel({
         />
       </section>
 
-      <section aria-labelledby="error-correction-heading" className="space-y-3">
-        <SectionLabel>{t.custErrorCorrection}</SectionLabel>
+      <section aria-labelledby="error-correction-heading" className="space-y-4 py-6">
+        <SectionLabel index="02.D">{t.custErrorCorrection}</SectionLabel>
         <RadioGroup
           label={t.custErrorCorrection}
           options={errorCorrectionOptions}

@@ -1,45 +1,35 @@
 "use client";
 
-import { QrCode, ShieldCheck, Sparkles } from "lucide-react";
 import { useI18n } from "@/lib/i18n/store";
+import { FRAME, SPLIT } from "@/lib/layout";
+import { cn } from "@/lib/utils";
 
 export function Hero() {
   const t = useI18n();
 
   return (
-    <section className="px-4 pb-12 pt-16 text-center sm:px-6 sm:pt-24">
-      <div className="mx-auto max-w-3xl animate-fade-up">
-        <span className="inline-flex items-center gap-1.5 rounded-full border border-line bg-card px-3 py-1.5 text-xs font-medium text-fg-secondary">
-          <Sparkles className="h-3.5 w-3.5 text-accent" aria-hidden="true" />
-          {t.heroBadge}
-        </span>
-
-        <h1 className="mt-6 text-balance text-4xl font-bold tracking-tight text-fg sm:text-5xl md:text-6xl">
-          {t.heroTitleStart}
-          <span className="bg-gradient-to-r from-accent to-accent-blue bg-clip-text text-transparent">
-            {t.heroTitleAccent}
-          </span>
-          {t.heroTitleEnd}
-        </h1>
-
-        <p className="mx-auto mt-5 max-w-xl text-pretty text-base text-fg-secondary sm:text-lg">
-          {t.heroSubtitle}
-        </p>
-
-        <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-          <a
-            href="#generator"
-            className="inline-flex h-12 items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-accent to-accent-blue px-7 text-sm font-semibold text-white shadow-[0_8px_30px_-8px_rgba(124,58,237,0.6)] transition-all duration-150 hover:brightness-110 active:brightness-95"
-          >
-            <QrCode className="h-4 w-4" aria-hidden="true" />
-            {t.heroCta}
-          </a>
+    <section className="border-b border-line">
+      <div className={cn(FRAME, SPLIT)}>
+        <div className="px-4 pb-8 pt-10 sm:px-6 lg:border-r lg:border-line lg:pb-10 lg:pt-14">
+          <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-fg-muted">
+            {t.heroBadge}
+          </p>
+          <h1 className="mt-4 max-w-[20ch] text-balance text-3xl font-semibold leading-[1.1] tracking-[-0.03em] text-fg sm:text-4xl">
+            {t.heroTitleStart}
+            <span className="text-fg-muted">{t.heroTitleAccent}</span>
+            {t.heroTitleEnd}
+          </h1>
         </div>
 
-        <p className="mt-6 inline-flex items-center gap-1.5 text-xs text-fg-muted">
-          <ShieldCheck className="h-3.5 w-3.5 text-accent" aria-hidden="true" />
-          {t.heroPrivacyNote}
-        </p>
+        <div className="flex flex-col justify-end gap-4 border-t border-line px-4 py-6 sm:px-6 lg:border-t-0 lg:py-10">
+          <p className="max-w-xl text-pretty text-sm leading-relaxed text-fg-secondary">
+            {t.heroSubtitle}
+          </p>
+          <p className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.08em] text-fg-muted">
+            <span className="h-1.5 w-1.5 bg-fg-muted" aria-hidden="true" />
+            {t.heroPrivacyNote}
+          </p>
+        </div>
       </div>
     </section>
   );

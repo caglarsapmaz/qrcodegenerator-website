@@ -8,6 +8,8 @@ import { LanguageToggle } from "@/components/LanguageToggle";
 import { GitHubIcon } from "@/components/GitHubIcon";
 import { useI18n } from "@/lib/i18n/store";
 import { APP_NAME, GITHUB_URL } from "@/lib/constants";
+import { FRAME } from "@/lib/layout";
+import { cn } from "@/lib/utils";
 
 function NavItem({
   href,
@@ -23,7 +25,7 @@ function NavItem({
   icon?: React.ReactNode;
 }) {
   const className =
-    "flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium text-fg-secondary transition-colors duration-150 hover:bg-fg/5 hover:text-fg";
+    "flex h-12 items-center gap-2 px-3 text-[13px] text-fg-secondary transition-colors duration-150 hover:bg-fg/[0.04] hover:text-fg md:h-auto md:py-1.5";
   if (external) {
     return (
       <a href={href} onClick={onNavigate} target="_blank" rel="noreferrer" className={className}>
@@ -51,19 +53,23 @@ export function Header() {
   ];
 
   return (
-    <header className="sticky top-0 z-40 border-b border-line bg-bg/70 backdrop-blur-xl">
-      <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between px-4 sm:px-6">
-        <Link href="/" className="flex items-center gap-2.5" aria-label={`${APP_NAME} ana sayfa`}>
-          <span className="flex h-8 w-8 items-center justify-center rounded-[10px] bg-gradient-to-br from-accent to-accent-blue text-white shadow-[0_4px_16px_-4px_rgba(124,58,237,0.6)]">
-            <QrCode className="h-4 w-4" />
+    <header className="sticky top-0 z-40 border-b border-line bg-bg">
+      <div className={cn(FRAME, "flex h-12 items-center justify-between px-4 sm:px-6")}>
+        <div className="flex items-center gap-3">
+          <Link href="/" className="flex items-center gap-2.5" aria-label={`${APP_NAME} ana sayfa`}>
+            <span className="flex h-6 w-6 items-center justify-center bg-fg text-bg">
+              <QrCode className="h-3.5 w-3.5" strokeWidth={2.25} />
+            </span>
+            <span className="text-sm font-semibold tracking-tight text-fg">{APP_NAME}</span>
+          </Link>
+          <span className="hidden h-4 w-px bg-line-strong sm:block" aria-hidden="true" />
+          <span className="hidden font-mono text-[11px] uppercase tracking-[0.12em] text-fg-muted sm:block">
+            QR / Generator
           </span>
-          <span className="text-[15px] font-semibold tracking-tight text-fg">
-            {APP_NAME}
-          </span>
-        </Link>
+        </div>
 
-        <nav className="flex items-center gap-1" aria-label="Ana menü">
-          <div className="hidden items-center gap-1 md:flex">
+        <nav className="flex items-center" aria-label="Ana menü">
+          <div className="hidden items-center md:flex">
             {navLinks.map((link) => (
               <NavItem key={link.href} href={link.href} label={link.label} />
             ))}
@@ -73,9 +79,10 @@ export function Header() {
               external
               icon={<GitHubIcon className="h-3.5 w-3.5" />}
             />
+            <span className="mx-2 h-4 w-px bg-line-strong" aria-hidden="true" />
           </div>
 
-          <div className="flex items-center gap-1">
+          <div className="flex items-center">
             <LanguageToggle />
             <ThemeToggle />
             <button
@@ -84,9 +91,9 @@ export function Header() {
               aria-expanded={menuOpen}
               aria-controls="mobile-menu"
               aria-label={menuOpen ? t.ariaCloseMenu : t.ariaOpenMenu}
-              className="flex h-9 w-9 items-center justify-center rounded-lg text-fg-secondary transition-colors hover:bg-fg/5 hover:text-fg md:hidden"
+              className="flex h-8 w-8 items-center justify-center text-fg-secondary transition-colors hover:bg-fg/[0.05] hover:text-fg md:hidden"
             >
-              {menuOpen ? <X className="h-4.5 w-4.5" /> : <Menu className="h-4.5 w-4.5" />}
+              {menuOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
             </button>
           </div>
         </nav>
@@ -96,7 +103,7 @@ export function Header() {
         <nav
           id="mobile-menu"
           aria-label="Mobil menü"
-          className="flex flex-col gap-1 border-t border-line bg-bg/95 px-4 py-3 backdrop-blur-xl md:hidden"
+          className="flex flex-col divide-y divide-line border-t border-line bg-bg md:hidden"
         >
           {navLinks.map((link) => (
             <NavItem

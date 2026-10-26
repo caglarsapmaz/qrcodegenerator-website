@@ -41,16 +41,16 @@ export function LanguageToggle() {
         aria-label={t.ariaChangeLanguage}
         aria-haspopup="listbox"
         aria-expanded={open}
-        className="flex h-9 w-9 items-center justify-center rounded-lg text-fg-secondary transition-colors duration-150 hover:bg-fg/5 hover:text-fg"
+        className="flex h-8 w-8 items-center justify-center text-fg-secondary transition-colors duration-150 hover:bg-fg/[0.05] hover:text-fg"
       >
-        <current.Flag className="h-4 w-6 rounded-[2px] ring-1 ring-line" />
+        <current.Flag className="h-3 w-[18px] ring-1 ring-line-strong" />
       </button>
 
       {open && (
         <div
           role="listbox"
           aria-label={t.ariaChangeLanguage}
-          className="absolute right-0 top-11 z-50 w-40 overflow-hidden rounded-xl border border-line bg-card-elevated py-1 shadow-[0_16px_40px_-12px_rgba(0,0,0,0.6)]"
+          className="absolute right-0 top-10 z-50 w-40 divide-y divide-line border border-line-strong bg-card-elevated"
         >
           {OPTIONS.map(({ value, label, Flag }) => {
             const selected = value === language;
@@ -64,11 +64,11 @@ export function LanguageToggle() {
                   setLanguage(value);
                   setOpen(false);
                 }}
-                className="flex w-full items-center gap-2.5 px-3 py-2.5 text-sm text-fg-secondary transition-colors duration-150 hover:bg-fg/5 hover:text-fg"
+                className="flex w-full items-center gap-2.5 px-3 py-2.5 text-[13px] text-fg-secondary transition-colors duration-150 hover:bg-fg/[0.05] hover:text-fg"
               >
-                <Flag className="h-3.5 w-5 rounded-[2px] ring-1 ring-line" />
+                <Flag className="h-3 w-[18px] ring-1 ring-line-strong" />
                 <span className="flex-1 text-left">{label}</span>
-                {selected && <Check className="h-3.5 w-3.5 text-accent" aria-hidden="true" />}
+                {selected && <Check className="h-3.5 w-3.5 text-fg" aria-hidden="true" />}
               </button>
             );
           })}

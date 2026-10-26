@@ -54,9 +54,9 @@ export function ThemeToggle() {
       onClick={() => applyTheme(isDark ? "light" : "dark")}
       aria-label={label}
       title={label}
-      className="flex h-9 w-9 items-center justify-center rounded-lg text-fg-secondary transition-colors duration-150 hover:bg-fg/5 hover:text-fg"
+      className="flex h-8 w-8 items-center justify-center text-fg-secondary transition-colors duration-150 hover:bg-fg/[0.05] hover:text-fg"
     >
-      {isDark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+      {isDark ? <Sun className="h-3.5 w-3.5" /> : <Moon className="h-3.5 w-3.5" />}
     </button>
   );
 }

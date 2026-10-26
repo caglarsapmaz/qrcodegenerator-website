@@ -18,9 +18,9 @@ import {
   saveHistory,
   saveSettings,
 } from "@/lib/storage/storage";
-import { uid } from "@/lib/utils";
+import { cn, uid } from "@/lib/utils";
+import { FRAME, SPLIT } from "@/lib/layout";
 import { useToast } from "@/components/ui/Toast";
-import { Card } from "@/components/ui/Card";
 import { ContentTypeSelector } from "@/components/ContentTypeSelector";
 import { ContentForm } from "@/components/ContentForm";
 import { CustomizationPanel } from "@/components/CustomizationPanel";
@@ -130,55 +130,72 @@ export function QRGenerator() {
   }, [toast, t]);
 
   return (
-    <section id="generator" aria-label={t.genHeading} className="scroll-mt-24">
-      <div className="mx-auto w-full max-w-6xl px-4 sm:px-6">
-        <div className="grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] lg:gap-8">
-          {/* Preview renders first in the DOM so it sits on top on mobile. */}
-          <div className="order-1 lg:order-2">
-            <div className="lg:sticky lg:top-24">
-              <QRPreview settings={settings} status={status} logo={logo} />
-            </div>
-          </div>
-
-          <div className="order-2 space-y-6 lg:order-1">
-            <Card className="p-5 sm:p-6">
-              <div className="flex items-center justify-between gap-3">
-                <h2 className="text-base font-semibold text-fg">{t.genHeading}</h2>
-                <button
-                  type="button"
-                  onClick={handleReset}
-                  className="inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs font-medium text-fg-muted transition-colors duration-150 hover:bg-fg/5 hover:text-fg"
-                  aria-label={t.genResetAria}
-                >
-                  <RotateCcw className="h-3.5 w-3.5" aria-hidden="true" />
-                  {t.genReset}
-                </button>
-              </div>
-
-              <div className="mt-5 space-y-6">
-                <ContentTypeSelector value={settings.type} onChange={changeType} />
-                <ContentForm
-                  type={settings.type}
-                  content={settings.content}
-                  errors={errors}
-                  onChange={updateContent}
-                />
-              </div>
-            </Card>
-
-            <Card className="p-5 sm:p-6">
-              <CustomizationPanel
-                settings={settings}
-                onChange={updateSettings}
-                logo={logo}
-                onLogoChange={handleLogoChange}
-              />
-            </Card>
+    <section id="generator" aria-label={t.genHeading} className="scroll-mt-12 border-b border-line">
+      <div className={cn(FRAME, SPLIT)}>
+        {/* Preview renders first in the DOM so it sits on top on mobile. */}
+        <div className="order-1 border-b border-line lg:order-2 lg:border-b-0">
+          <div className="lg:sticky lg:top-12 lg:max-h-[calc(100vh-3rem)] lg:overflow-y-auto">
+            <QRPreview settings={settings} status={status} logo={logo} />
           </div>
         </div>
 
+        <div className="order-2 lg:order-1 lg:border-r lg:border-line">
+          <PanelHeader index="01" title={t.genHeading}>
+            <button
+              type="button"
+              onClick={handleReset}
+              className="inline-flex h-7 items-center gap-1.5 border border-line-strong px-2.5 text-xs text-fg-secondary transition-colors duration-150 hover:border-fg-muted hover:text-fg"
+              aria-label={t.genResetAria}
+            >
+              <RotateCcw className="h-3 w-3" aria-hidden="true" />
+              {t.genReset}
+            </button>
+          </PanelHeader>
+          <div className="space-y-6 px-4 py-6 sm:px-6">
+            <ContentTypeSelector value={settings.type} onChange={changeType} />
+            <ContentForm
+              type={settings.type}
+              content={settings.content}
+              errors={errors}
+              onChange={updateContent}
+            />
+          </div>
+
+          <PanelHeader index="02" title={t.genAppearance} />
+          <div className="px-4 sm:px-6">
+            <CustomizationPanel
+              settings={settings}
+              onChange={updateSettings}
+              logo={logo}
+              onLogoChange={handleLogoChange}
+            />
+          </div>
+        </div>
+      </div>
+
+      <div className={cn(FRAME, "border-t border-line")}>
         <History entries={entries} onRestore={handleRestore} onClear={handleClearHistory} />
       </div>
     </section>
+  );
+}
+
+function PanelHeader({
+  index,
+  title,
+  children,
+}: {
+  index: string;
+  title: string;
+  children?: React.ReactNode;
+}) {
+  return (
+    <div className="flex h-12 items-center justify-between gap-3 border-y border-line bg-bg-secondary px-4 first:border-t-0 sm:px-6">
+      <h2 className="flex items-center gap-3 text-[13px] font-medium text-fg">
+        <span className="font-mono text-[11px] text-fg-muted">{index}</span>
+        {title}
+      </h2>
+      {children}
+    </div>
   );
 }

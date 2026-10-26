@@ -95,22 +95,22 @@ export function LogoUploader({
   if (logo) {
     return (
       <div className="space-y-4">
-        <div className="flex items-center gap-4 rounded-xl border border-line bg-bg-secondary p-3">
+        <div className="flex items-center gap-4 border border-line-strong p-3">
           {/* eslint-disable-next-line @next/next/no-img-element -- data URL preview */}
           <img
             src={logo}
             alt={t.custLogoAttached}
-            className="h-14 w-14 shrink-0 rounded-lg border border-line bg-white object-contain p-1"
+            className="h-12 w-12 shrink-0 border border-line-strong bg-white object-contain p-1"
           />
           <div className="min-w-0 flex-1">
-            <p className="truncate text-sm font-medium text-fg">{t.custLogoAttached}</p>
+            <p className="truncate text-[13px] font-medium text-fg">{t.custLogoAttached}</p>
             <p className="mt-0.5 text-xs text-fg-muted">{t.custLogoNote}</p>
           </div>
           <button
             type="button"
             onClick={() => onLogoChange(null)}
             aria-label={t.custRemoveLogoAria}
-            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-fg-muted transition-colors duration-150 hover:bg-red-500/10 hover:text-red-400"
+            className="flex h-8 w-8 shrink-0 items-center justify-center border border-line-strong text-fg-muted transition-colors duration-150 hover:border-red-500/60 hover:text-red-400"
           >
             <Trash2 className="h-4 w-4" />
           </button>
@@ -141,19 +141,21 @@ export function LogoUploader({
         onDragLeave={() => setDragOver(false)}
         onDrop={handleDrop}
         className={cn(
-          "flex w-full flex-col items-center justify-center gap-2 rounded-xl border border-dashed px-4 py-7 transition-colors duration-150",
+          "flex w-full items-center gap-4 border border-dashed px-4 py-5 text-left transition-colors duration-150",
           dragOver
-            ? "border-accent bg-accent/10"
-            : "border-line bg-bg-secondary hover:border-fg-muted/50",
+            ? "border-fg bg-fg/[0.04]"
+            : "border-line-strong hover:border-fg-muted",
         )}
       >
-        <span className="flex h-10 w-10 items-center justify-center rounded-full bg-card-elevated ring-1 ring-line">
-          <FileImage className="h-5 w-5 text-fg-secondary" aria-hidden="true" />
+        <span className="flex h-9 w-9 shrink-0 items-center justify-center border border-line-strong">
+          <FileImage className="h-4 w-4 text-fg-secondary" strokeWidth={1.75} aria-hidden="true" />
         </span>
-        <span className="text-sm font-medium text-fg">
-          {busy ? t.custReadingImage : t.custUploadLogo}
+        <span className="min-w-0">
+          <span className="block text-[13px] font-medium text-fg">
+            {busy ? t.custReadingImage : t.custUploadLogo}
+          </span>
+          <span className="mt-0.5 block text-xs text-fg-muted">{t.custDragDropHint}</span>
         </span>
-        <span className="text-xs text-fg-muted">{t.custDragDropHint}</span>
       </button>
       <input
         ref={inputRef}

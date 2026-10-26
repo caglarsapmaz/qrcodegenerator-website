@@ -22,12 +22,13 @@ export default function DocsPage() {
   return (
     <>
       <Header />
-      <main className="mx-auto w-full max-w-3xl flex-1 px-4 py-14 sm:px-6">
-        <h1 className="text-3xl font-bold tracking-tight text-fg">{t.docsTitle}</h1>
-        <p className="mt-2 text-fg-secondary">{t.docsSubtitle}</p>
+      <main className="mx-auto w-full max-w-3xl flex-1 border-x border-line px-4 py-14 sm:px-8">
+        <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-fg-muted">Zyqra / Docs</p>
+        <h1 className="mt-3 text-3xl font-semibold tracking-[-0.03em] text-fg">{t.docsTitle}</h1>
+        <p className="mt-2 text-sm text-fg-secondary">{t.docsSubtitle}</p>
 
         <Card className="mt-8 p-6 sm:p-8">
-          <h2 className="text-lg font-semibold text-fg">{t.docsGettingStarted}</h2>
+          <h2 className="text-[15px] font-medium text-fg">{t.docsGettingStarted}</h2>
           <ol className="mt-3 list-decimal space-y-2 pl-5 text-sm leading-relaxed text-fg-secondary">
             <li>{t.docsStep1}</li>
             <li>{t.docsStep2}</li>
@@ -37,7 +38,7 @@ export default function DocsPage() {
         </Card>
 
         <Card className="mt-6 p-6 sm:p-8">
-          <h2 className="text-lg font-semibold text-fg">{t.docsContentTypes}</h2>
+          <h2 className="text-[15px] font-medium text-fg">{t.docsContentTypes}</h2>
           <dl className="mt-3 divide-y divide-line">
             {CONTENT_TYPE_KEYS.map(([type, descriptionKey]) => (
               <div key={type} className="flex items-baseline gap-4 py-3">
@@ -49,12 +50,12 @@ export default function DocsPage() {
         </Card>
 
         <Card className="mt-6 p-6 sm:p-8">
-          <h2 className="text-lg font-semibold text-fg">{t.docsCustomization}</h2>
+          <h2 className="text-[15px] font-medium text-fg">{t.docsCustomization}</h2>
           <p className="mt-3 text-sm leading-relaxed text-fg-secondary">{t.docsCustomBody}</p>
         </Card>
 
         <Card className="mt-6 scroll-mt-24 p-6 sm:p-8" id="privacy">
-          <h2 className="text-lg font-semibold text-fg">{t.docsPrivacy}</h2>
+          <h2 className="text-[15px] font-medium text-fg">{t.docsPrivacy}</h2>
           <p className="mt-3 text-sm leading-relaxed text-fg-secondary">{t.docsPrivacyBody}</p>
         </Card>
       </main>

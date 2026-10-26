@@ -5,20 +5,13 @@ export function Card({
   className,
   ...props
 }: HTMLAttributes<HTMLDivElement>) {
-  return (
-    <div
-      className={cn(
-        "rounded-2xl border border-line bg-card shadow-[var(--card-shadow)]",
-        className,
-      )}
-      {...props}
-    />
-  );
+  return <div className={cn("border border-line bg-card", className)} {...props} />;
 }
 
-export function SectionLabel({ children }: { children: string }) {
+export function SectionLabel({ children, index }: { children: string; index?: string }) {
   return (
-    <h3 className="text-[11px] font-semibold uppercase tracking-[0.08em] text-fg-muted">
+    <h3 className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.12em] text-fg-muted">
+      {index && <span className="text-fg-secondary">{index}</span>}
       {children}
     </h3>
   );

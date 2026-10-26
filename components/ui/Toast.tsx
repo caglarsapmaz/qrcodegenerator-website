@@ -76,15 +76,15 @@ export function ToastProvider({ children }: { children: ReactNode }) {
           return (
             <div
               key={item.id}
-              className="animate-toast-in pointer-events-auto flex w-full items-start gap-3 rounded-xl border border-line bg-card-elevated/95 px-4 py-3 shadow-[0_16px_40px_-12px_rgba(0,0,0,0.6)] backdrop-blur"
+              className="animate-toast-in pointer-events-auto flex w-full items-start gap-3 border border-line-strong bg-card-elevated px-3.5 py-3"
             >
               <Icon className={cn("mt-px h-4 w-4 shrink-0", iconClass)} />
-              <p className="min-w-0 flex-1 text-sm text-fg">{item.message}</p>
+              <p className="min-w-0 flex-1 text-[13px] text-fg">{item.message}</p>
               <button
                 type="button"
                 onClick={() => dismiss(item.id)}
                 aria-label={t.ariaDismissToast}
-                className="shrink-0 rounded-md p-1 text-fg-muted transition-colors hover:text-fg"
+                className="shrink-0 p-1 text-fg-muted transition-colors hover:text-fg"
               >
                 <X className="h-3.5 w-3.5" />
               </button>

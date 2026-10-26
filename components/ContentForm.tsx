@@ -38,7 +38,7 @@ function PasswordInput({
         type="button"
         onClick={() => setVisible((v) => !v)}
         aria-label={visible ? t.formHidePassword : t.formShowPassword}
-        className="absolute right-2.5 top-1/2 -translate-y-1/2 rounded-md p-1.5 text-fg-muted transition-colors hover:text-fg"
+        className="absolute right-1 top-1/2 flex h-8 w-8 -translate-y-1/2 items-center justify-center text-fg-muted transition-colors hover:text-fg"
       >
         {visible ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
       </button>
@@ -128,7 +128,7 @@ export function ContentForm({
                 options={WIFI_SECURITY_OPTIONS}
               />
             </Field>
-            <div className="flex items-end pb-2.5">
+            <div className="flex items-end pb-3">
               <Checkbox
                 label={t.formHiddenNetwork}
                 checked={content.hidden}

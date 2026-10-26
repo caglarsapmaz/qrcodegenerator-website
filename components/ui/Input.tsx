@@ -11,7 +11,11 @@ import { ChevronDown, CircleAlert } from "lucide-react";
 import { cn, isValidHexColor } from "@/lib/utils";
 
 export const inputBase =
-  "w-full min-h-11 rounded-xl border border-line bg-bg-secondary px-3.5 text-sm text-fg placeholder:text-fg-muted transition-colors duration-150 focus:border-accent/50 focus:outline-none focus:ring-2 focus:ring-accent/20 disabled:opacity-50";
+  "w-full min-h-10 border border-line-strong bg-bg px-3 text-[13px] text-fg placeholder:text-fg-muted transition-colors duration-150 hover:border-fg-muted/60 focus:border-fg focus:outline-none disabled:opacity-50";
+
+const invalidClass = "border-red-500/70 hover:border-red-500/70 focus:border-red-500";
+
+const labelClass = "text-xs font-medium text-fg-secondary";
 
 export function Field({
   label,
@@ -32,7 +36,7 @@ export function Field({
   return (
     <div className={className}>
       {label && (
-        <label htmlFor={htmlFor} className="mb-1.5 block text-xs font-medium text-fg-secondary">
+        <label htmlFor={htmlFor} className={cn(labelClass, "mb-1.5 block")}>
           {label}
         </label>
       )}
@@ -54,12 +58,7 @@ export function Input({
   invalid,
   ...props
 }: InputHTMLAttributes<HTMLInputElement> & { invalid?: boolean }) {
-  return (
-    <input
-      className={cn(inputBase, invalid && "border-red-500/60 focus:border-red-500/60 focus:ring-red-500/20", className)}
-      {...props}
-    />
-  );
+  return <input className={cn(inputBase, invalid && invalidClass, className)} {...props} />;
 }
 
 export function Textarea({
@@ -69,7 +68,7 @@ export function Textarea({
 }: TextareaHTMLAttributes<HTMLTextAreaElement> & { invalid?: boolean }) {
   return (
     <textarea
-      className={cn(inputBase, "py-2.5 leading-relaxed", invalid && "border-red-500/60 focus:border-red-500/60 focus:ring-red-500/20", className)}
+      className={cn(inputBase, "py-2.5 leading-relaxed", invalid && invalidClass, className)}
       {...props}
     />
   );
@@ -91,7 +90,7 @@ export function Select({
           </option>
         ))}
       </select>
-      <ChevronDown className="pointer-events-none absolute right-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-fg-muted" />
+      <ChevronDown className="pointer-events-none absolute right-3 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-fg-muted" />
     </div>
   );
 }
@@ -118,8 +117,8 @@ export function Slider({
   return (
     <div>
       <div className="flex items-baseline justify-between gap-3">
-        <label className="text-xs font-medium text-fg-secondary">{label}</label>
-        <span className="text-xs font-medium tabular-nums text-fg">
+        <label className={labelClass}>{label}</label>
+        <span className="border border-line-strong px-1.5 py-px font-mono text-[11px] tabular-nums text-fg">
           {format ? format(value) : value}
         </span>
       </div>
@@ -133,7 +132,11 @@ export function Slider({
         aria-label={label}
         className="mt-2 w-full"
       />
-      {hint && <p className="mt-1 text-xs text-fg-muted">{hint}</p>}
+      <div className="flex justify-between font-mono text-[10px] tabular-nums text-fg-muted">
+        <span>{format ? format(min) : min}</span>
+        <span>{format ? format(max) : max}</span>
+      </div>
+      {hint && <p className="mt-1.5 text-xs text-fg-muted">{hint}</p>}
     </div>
   );
 }
@@ -153,7 +156,7 @@ export function SegmentedControl<T extends string>({
     <div
       role="radiogroup"
       aria-label={label}
-      className="grid gap-1 rounded-xl border border-line bg-bg-secondary p-1"
+      className="grid gap-px border border-line-strong bg-line-strong"
       style={{ gridTemplateColumns: `repeat(${options.length}, minmax(0, 1fr))` }}
     >
       {options.map((option) => {
@@ -166,10 +169,8 @@ export function SegmentedControl<T extends string>({
             aria-checked={active}
             onClick={() => onChange(option.value)}
             className={cn(
-              "flex min-h-9 items-center justify-center rounded-[9px] px-2 text-xs font-medium transition-all duration-150",
-              active
-                ? "bg-card-elevated text-fg shadow-sm ring-1 ring-line"
-                : "text-fg-secondary hover:text-fg",
+              "flex min-h-9 items-center justify-center px-2 text-xs font-medium transition-colors duration-150",
+              active ? "bg-fg text-bg" : "bg-bg text-fg-secondary hover:bg-bg-secondary hover:text-fg",
             )}
           >
             {option.label}
@@ -193,8 +194,8 @@ export function RadioGroup<T extends string>({
 }) {
   return (
     <fieldset>
-      <legend className="text-xs font-medium text-fg-secondary">{label}</legend>
-      <div className="mt-1.5 grid grid-cols-2 gap-2">
+      <legend className={labelClass}>{label}</legend>
+      <div className="mt-1.5 grid grid-cols-2 gap-px border border-line-strong bg-line-strong sm:grid-cols-4">
         {options.map((option) => {
           const active = option.value === value;
           return (
@@ -205,27 +206,22 @@ export function RadioGroup<T extends string>({
               aria-checked={active}
               onClick={() => onChange(option.value)}
               className={cn(
-                "flex items-center gap-2.5 rounded-xl border px-3 py-2.5 text-left text-xs font-medium transition-all duration-150",
-                active
-                  ? "border-accent/50 bg-accent/10 text-fg"
-                  : "border-line bg-bg-secondary text-fg-secondary hover:border-fg-muted/40 hover:text-fg",
+                "flex flex-col items-start gap-1 px-3 py-2.5 text-left text-xs font-medium transition-colors duration-150",
+                active ? "bg-fg text-bg" : "bg-bg text-fg-secondary hover:bg-bg-secondary hover:text-fg",
               )}
             >
-              <span
-                className={cn(
-                  "flex h-3.5 w-3.5 shrink-0 items-center justify-center rounded-full border",
-                  active ? "border-accent" : "border-fg-muted",
-                )}
-                aria-hidden="true"
-              >
-                {active && <span className="h-1.5 w-1.5 rounded-full bg-accent" />}
-              </span>
-              <span className="flex min-w-0 flex-1 items-baseline justify-between gap-2">
+              <span className="flex w-full items-center justify-between gap-2">
                 {option.label}
-                {option.hint && (
-                  <span className="text-[10px] tabular-nums text-fg-muted">{option.hint}</span>
-                )}
+                <span
+                  className={cn("h-1.5 w-1.5 shrink-0", active ? "bg-bg" : "border border-fg-muted")}
+                  aria-hidden="true"
+                />
               </span>
+              {option.hint && (
+                <span className={cn("font-mono text-[10px] tabular-nums", active ? "text-bg/60" : "text-fg-muted")}>
+                  {option.hint}
+                </span>
+              )}
             </button>
           );
         })}
@@ -244,12 +240,12 @@ export function Checkbox({
   onChange: (checked: boolean) => void;
 }) {
   return (
-    <label className="flex cursor-pointer select-none items-center gap-2.5 text-sm text-fg-secondary">
+    <label className="flex cursor-pointer select-none items-center gap-2.5 text-[13px] text-fg-secondary">
       <input
         type="checkbox"
         checked={checked}
         onChange={(event) => onChange(event.target.checked)}
-        className="h-4 w-4 cursor-pointer rounded accent-accent"
+        className="check cursor-pointer"
       />
       {label}
     </label>
@@ -277,17 +273,13 @@ export function ColorField({
 
   return (
     <div>
-      <span className="text-xs font-medium text-fg-secondary">{label}</span>
-      <div className="mt-1.5 flex items-center gap-2">
+      <span className={labelClass}>{label}</span>
+      <div className="mt-1.5 flex">
         <label
-          className="relative h-11 w-11 shrink-0 cursor-pointer overflow-hidden rounded-xl border border-line bg-card-elevated"
+          className="relative h-10 w-10 shrink-0 cursor-pointer border border-r-0 border-line-strong"
           title={`Choose ${label.toLowerCase()} color`}
         >
-          <span
-            className="absolute inset-0 rounded-xl"
-            style={{ background: value }}
-            aria-hidden="true"
-          />
+          <span className="absolute inset-[3px]" style={{ background: value }} aria-hidden="true" />
           <input
             type="color"
             value={isValidHexColor(value) ? value : "#000000"}
@@ -307,7 +299,7 @@ export function ColorField({
           aria-label={`${label} hex value`}
           maxLength={7}
           spellCheck={false}
-          className={cn(inputBase, "min-h-11 w-28 font-mono uppercase")}
+          className={cn(inputBase, "font-mono uppercase")}
         />
       </div>
     </div>

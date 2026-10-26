@@ -5,19 +5,19 @@ type Variant = "primary" | "secondary" | "ghost" | "danger";
 type Size = "sm" | "md" | "lg";
 
 const VARIANTS: Record<Variant, string> = {
+  // The only element on the page allowed to glow.
   primary:
-    "bg-gradient-to-r from-accent to-accent-blue text-white shadow-[0_8px_24px_-8px_rgba(124,58,237,0.55)] hover:brightness-110 active:brightness-95",
+    "border border-accent bg-accent text-accent-fg shadow-[0_0_0_1px_var(--accent),0_0_18px_-6px_var(--accent-glow)] hover:shadow-[0_0_0_1px_var(--accent),0_0_28px_-4px_var(--accent-glow)] active:translate-y-px",
   secondary:
-    "border border-line bg-card-elevated text-fg hover:bg-fg/5 active:bg-fg/10",
-  ghost: "text-fg-secondary hover:bg-fg/5 hover:text-fg",
-  danger:
-    "text-red-500 dark:text-red-400 hover:bg-red-500/10",
+    "border border-line-strong bg-bg text-fg hover:border-fg-muted hover:bg-fg/[0.04] active:bg-fg/[0.08]",
+  ghost: "text-fg-secondary hover:bg-fg/[0.05] hover:text-fg",
+  danger: "text-red-500 dark:text-red-400 hover:bg-red-500/10",
 };
 
 const SIZES: Record<Size, string> = {
-  sm: "h-9 px-3 text-xs",
-  md: "h-11 px-4 text-sm",
-  lg: "h-12 px-6 text-sm",
+  sm: "h-8 px-3 text-xs",
+  md: "h-10 px-4 text-[13px]",
+  lg: "h-11 px-5 text-[13px]",
 };
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -37,7 +37,7 @@ export function Button({
     <button
       type="button"
       className={cn(
-        "inline-flex select-none items-center justify-center gap-2 rounded-xl font-medium transition-all duration-150 disabled:pointer-events-none disabled:opacity-40",
+        "inline-flex select-none items-center justify-center gap-2 font-medium transition-[background-color,border-color,box-shadow,color] duration-150 disabled:pointer-events-none disabled:opacity-35 disabled:shadow-none",
         VARIANTS[variant],
         SIZES[size],
         className,

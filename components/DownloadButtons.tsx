@@ -87,55 +87,54 @@ export function DownloadButtons({
 
   return (
     <div>
-      <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+      <Button
+        variant="primary"
+        size="lg"
+        onClick={() => void handleDownload("png")}
+        disabled={disabled || busy !== null}
+        aria-label={t.dlPngAria}
+        className="w-full"
+      >
+        <Download className="h-4 w-4" aria-hidden="true" />
+        {busy === "png" ? t.dlDownloading : t.dlPng}
+      </Button>
+      <div className="mt-2 grid grid-cols-3 gap-px border border-line-strong bg-line-strong">
         <Button
-          variant="primary"
-          onClick={() => void handleDownload("png")}
+          onClick={() => void handleDownload("svg")}
           disabled={disabled || busy !== null}
-          aria-label={t.dlPngAria}
+          aria-label={t.dlSvgAria}
+          className="border-0 font-mono text-xs"
         >
-          <Download className="h-4 w-4" aria-hidden="true" />
-          {busy === "png" ? t.dlDownloading : t.dlPng}
+          {t.dlSvg}
         </Button>
-        <div className="grid grid-cols-2 gap-2">
-          <Button
-            onClick={() => void handleDownload("svg")}
-            disabled={disabled || busy !== null}
-            aria-label={t.dlSvgAria}
-          >
-            <Download className="h-4 w-4" aria-hidden="true" />
-            {t.dlSvg}
-          </Button>
-          <Button
-            onClick={() => void handleDownload("webp")}
-            disabled={disabled || busy !== null}
-            aria-label={t.dlWebpAria}
-          >
-            <Download className="h-4 w-4" aria-hidden="true" />
-            {t.dlWebp}
-          </Button>
-        </div>
         <Button
-          variant="secondary"
+          onClick={() => void handleDownload("webp")}
+          disabled={disabled || busy !== null}
+          aria-label={t.dlWebpAria}
+          className="border-0 font-mono text-xs"
+        >
+          {t.dlWebp}
+        </Button>
+        <Button
           onClick={() => void handleCopy()}
           disabled={disabled || busy !== null}
-          className="sm:col-span-2"
           aria-label={t.dlCopyAria}
+          className="border-0 text-xs"
         >
           {copied ? (
             <>
-              <Check className="h-4 w-4 text-emerald-400" aria-hidden="true" />
+              <Check className="h-3.5 w-3.5 text-accent" aria-hidden="true" />
               {t.dlCopied}
             </>
           ) : (
             <>
-              <Copy className="h-4 w-4" aria-hidden="true" />
+              <Copy className="h-3.5 w-3.5" aria-hidden="true" />
               {t.dlCopy}
             </>
           )}
         </Button>
       </div>
-      <p className="mt-2 text-center text-[11px] text-fg-muted">{t.dlFileNote}</p>
+      <p className="mt-2 font-mono text-[10px] text-fg-muted">{t.dlFileNote}</p>
     </div>
   );
 }

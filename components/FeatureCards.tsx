@@ -2,7 +2,8 @@
 
 import { SlidersHorizontal, ShieldCheck, Sparkles, Zap } from "lucide-react";
 import { useI18n } from "@/lib/i18n/store";
-import { Card } from "@/components/ui/Card";
+import { FRAME } from "@/lib/layout";
+import { cn } from "@/lib/utils";
 
 export function FeatureCards() {
   const t = useI18n();
@@ -15,28 +16,29 @@ export function FeatureCards() {
   ];
 
   return (
-    <section id="features" aria-labelledby="features-heading" className="mt-20 scroll-mt-24">
-      <div className="mx-auto w-full max-w-6xl px-4 sm:px-6">
+    <section id="features" aria-labelledby="features-heading" className="scroll-mt-12 border-b border-line">
+      <div className={cn(FRAME, "border-b border-line px-4 py-10 sm:px-6")}>
+        <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-fg-muted">05</p>
         <h2
           id="features-heading"
-          className="text-balance text-center text-2xl font-bold tracking-tight text-fg sm:text-3xl"
+          className="mt-2 text-2xl font-semibold tracking-[-0.02em] text-fg"
         >
           {t.featHeading}
         </h2>
-        <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {features.map(({ icon: Icon, title, description }) => (
-            <Card
-              key={title}
-              className="p-6 transition-all duration-200 hover:-translate-y-0.5 hover:border-fg-muted/30 hover:shadow-[var(--card-shadow)]"
-            >
-              <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-accent/15 to-accent-blue/15 ring-1 ring-line">
-                <Icon className="h-5 w-5 text-accent" aria-hidden="true" />
+      </div>
+      <div className={cn(FRAME, "grid grid-cols-1 gap-px bg-line sm:grid-cols-2 lg:grid-cols-4")}>
+        {features.map(({ icon: Icon, title, description }, index) => (
+          <div key={title} className="bg-bg px-4 py-8 sm:px-6">
+            <div className="flex items-center justify-between">
+              <Icon className="h-4 w-4 text-fg" strokeWidth={1.75} aria-hidden="true" />
+              <span className="font-mono text-[10px] text-fg-muted">
+                {String(index + 1).padStart(2, "0")}
               </span>
-              <h3 className="mt-4 text-sm font-semibold text-fg">{title}</h3>
-              <p className="mt-1.5 text-sm leading-relaxed text-fg-secondary">{description}</p>
-            </Card>
-          ))}
-        </div>
+            </div>
+            <h3 className="mt-6 text-[13px] font-medium text-fg">{title}</h3>
+            <p className="mt-1.5 text-[13px] leading-relaxed text-fg-secondary">{description}</p>
+          </div>
+        ))}
       </div>
     </section>
   );
